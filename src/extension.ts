@@ -13,7 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
 	vscode.window.registerTreeDataProvider('pins', pinProvider);
 
 	const pinDisposable = vscode.commands.registerCommand(
-		'quick-pin.pinItem',
+		'pinit.pinItem',
 		async (selectedItem?: any) => {
 			console.log('pinIt triggered with selectedItem:', selectedItem);
 			
@@ -115,7 +115,7 @@ export function activate(context: vscode.ExtensionContext) {
 				// If all methods failed, show a message to the user
 				vscode.window.showErrorMessage('Could not determine which item to pin. Please select an item in the explorer or editor first.');
 				
-			} catch (outerError) {
+			} catch (outerError: any) {
 				console.error('Outer error in pinItem command:', outerError);
 				vscode.window.showErrorMessage(`Error pinning item: ${outerError.message}`);
 			}
@@ -167,13 +167,13 @@ export function activate(context: vscode.ExtensionContext) {
 			pinProvider.refresh(newPins);
 			
 			vscode.window.showInformationMessage(`Pinned: ${baseName}`);
-		} catch (error) {
+		} catch (error: any) {
 			console.error('Error in handlePinning:', error);
 			vscode.window.showErrorMessage(`Error pinning item: ${error.message}`);
 		}
 	}
 
-	const deleteDisposable = vscode.commands.registerCommand('quick-pin.deletePin', e => {
+	const deleteDisposable = vscode.commands.registerCommand('pinit.deletePin', e => {
 		const existingState: TPin[] | undefined = context.workspaceState.get('pins');
 		const newPins = existingState?.filter(p => p.fileLocation !== e.fileLocation);
 		if (!newPins) {
@@ -183,12 +183,12 @@ export function activate(context: vscode.ExtensionContext) {
 		pinProvider.refresh(newPins);
 	});
 
-	const deleteAllPins = vscode.commands.registerCommand('quick-pin.deleteAllPins', () => {
+	const deleteAllPins = vscode.commands.registerCommand('pinit.deleteAllPins', () => {
 		context.workspaceState.update('pins', []);
 		pinProvider.refresh([]);
 	});
 
-	const revealDisposable = vscode.commands.registerCommand('quick-pin.revealAndOpen', file => {
+	const revealDisposable = vscode.commands.registerCommand('pinit.revealAndOpen', file => {
 		vscode.commands.executeCommand('revealInExplorer', vscode.Uri.parse(file.path));
 		vscode.commands.executeCommand('list.expand');
 	});

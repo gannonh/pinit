@@ -1,6 +1,6 @@
 {
-  "name": "quick-pin",
-  "displayName": "Quick Pin",
+  "name": "pinit",
+  "displayName": "Pinit",
   "publisher": "Decahedra",
   "license": "MIT",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "https://github.com/decahedra/pinit"
   },
   "description": "Allows you to pin folders and files",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.82.0"
   },
@@ -40,18 +40,18 @@
     "menus": {
       "explorer/context": [
         {
-          "command": "quick-pin.pinItem"
+          "command": "pinit.pinItem"
         }
       ],
       "view/item/context": [
         {
           "when": "view == pins",
-          "command": "quick-pin.deletePin"
+          "command": "pinit.deletePin"
         }
       ],
       "view/title": [
         {
-          "command": "quick-pin.deleteAllPins",
+          "command": "pinit.deleteAllPins",
           "when": "view == pins",
           "group": "navigation"
         }
@@ -59,26 +59,26 @@
     },
     "commands": [
       {
-        "command": "quick-pin.pinItem",
+        "command": "pinit.pinItem",
         "title": "Pin Item"
       },
       {
-        "command": "quick-pin.deletePin",
+        "command": "pinit.deletePin",
         "title": "Delete Pin"
       },
       {
-        "command": "quick-pin.revealAndOpen",
+        "command": "pinit.revealAndOpen",
         "title": "Reveal and then open a selected folder"
       },
       {
-        "command": "quick-pin.deleteAllPins",
+        "command": "pinit.deleteAllPins",
         "title": "Delete all pins",
         "icon": "$(notebook-delete-cell)"
       }
     ],
     "keybindings": [
       {
-        "command": "quick-pin.pinItem",
+        "command": "pinit.pinItem",
         "key": "ctrl+p ctrl+i",
         "mac": "shift+cmd+i",
         "when": "explorerViewletFocus || editorFocus"
@@ -93,6 +93,7 @@
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
     "deploy": "vsce publish",
+    "build": "npm run esbuild && npx @vscode/vsce package",
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"

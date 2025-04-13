@@ -13,7 +13,7 @@ A simple extension that allows you to pin files and folders in VS Code for quick
 
 ### Pinning Items
 
-You can pin items in three ways:
+You can pin items in two ways:
 
 1. **Context Menu**: Right-click on a file or folder in the Explorer and select "Pin Item"
 2. **Keyboard Shortcut**: 
@@ -45,9 +45,13 @@ You can customize the keyboard shortcut by adding your own keybinding in VS Code
 
 VS Code 1.82.0 or higher.
 
-## Extension Settings
+## Changes in this Fork
 
-This extension doesn't add any settings to VS Code.
+This fork improves the original extension by:
+
+1. Adding support for keyboard shortcuts
+2. Implementing robust file path detection from both the editor and explorer
+3. Adding detailed error handling and user feedback
 
 ## License
 
