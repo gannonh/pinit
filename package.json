@@ -1,6 +1,6 @@
 {
-  "name": "pinit",
-  "displayName": "Pinit",
+  "name": "quick-pin",
+  "displayName": "Quick Pin",
   "publisher": "Decahedra",
   "license": "MIT",
   "repository": {
@@ -40,18 +40,18 @@
     "menus": {
       "explorer/context": [
         {
-          "command": "pinit.pinItem"
+          "command": "quick-pin.pinItem"
         }
       ],
       "view/item/context": [
         {
           "when": "view == pins",
-          "command": "pinit.deletePin"
+          "command": "quick-pin.deletePin"
         }
       ],
       "view/title": [
         {
-          "command": "pinit.deleteAllPins",
+          "command": "quick-pin.deleteAllPins",
           "when": "view == pins",
           "group": "navigation"
         }
@@ -59,21 +59,29 @@
     },
     "commands": [
       {
-        "command": "pinit.pinItem",
+        "command": "quick-pin.pinItem",
         "title": "Pin Item"
       },
       {
-        "command": "pinit.deletePin",
+        "command": "quick-pin.deletePin",
         "title": "Delete Pin"
       },
       {
-        "command": "pinit.revealAndOpen",
+        "command": "quick-pin.revealAndOpen",
         "title": "Reveal and then open a selected folder"
       },
       {
-        "command": "pinit.deleteAllPins",
+        "command": "quick-pin.deleteAllPins",
         "title": "Delete all pins",
         "icon": "$(notebook-delete-cell)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "quick-pin.pinItem",
+        "key": "ctrl+p ctrl+i",
+        "mac": "shift+cmd+i",
+        "when": "explorerViewletFocus || editorFocus"
       }
     ]
   },
@@ -81,7 +89,7 @@
     "vscode:prepublish": "npm run esbuild-base -- --minify",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "pnpm run compile && pnpm run lint",
+    "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
     "deploy": "vsce publish",
@@ -90,7 +98,6 @@
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
   },
   "devDependencies": {
-    "@decahedra/prettier-plugin": "^1.0.3",
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
     "@types/vscode": "^1.82.0",
@@ -101,6 +108,7 @@
     "eslint": "^8.47.0",
     "glob": "^10.3.3",
     "mocha": "^10.2.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "prettier": "^2.8.8"
   }
 }
